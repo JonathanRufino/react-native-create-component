@@ -1,0 +1,29 @@
+{
+  "name": "@jonathanrufino/react-native-create-component",
+  "version": "1.0.0",
+  "description": "A package to generate a react native componenet folder structure",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --reporter spec"
+  },
+  "bin": {
+    "react-native-create-component": "bin/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JonathanRufino/react-native-create-component.git"
+  },
+  "keywords": [
+    "react-native"
+  ],
+  "author": "Jonathan Rufino <jonathanrufinopaiva@gmail.com> (http://www.jonathanrufino.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JonathanRufino/react-native-create-component/issues"
+  },
+  "homepage": "https://github.com/JonathanRufino/react-native-create-component#readme",
+  "dependencies": {
+    "chalk": "^2.3.2",
+    "minimist": "^1.2.0"
+  }
+}
