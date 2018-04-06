@@ -4,45 +4,57 @@
 const fs = require('fs');
 const path = require('path');
 const chalk = require('chalk');
-const args = require('minimist');
+const argv = require('minimist');
 
-const componentPath = '/home/jonathan/Git/react-native-create-component/component/meucomponente.js'
-const indexPath = '/home/jonathan/Git/react-native-create-component/component/meuindex.js'
-const stylesPath = '/home/jonathan/Git/react-native-create-component/component/meustyle.js'
+const args = argv(process.argv.slice(2));
+const componentName = args._[0];
 
-const componentContent = 'meu componente';
-const indexContent = 'meu index';
-const stylesContent = 'meu style';
+const componentPath = path.join(path.dirname(__filename), componentName);
 
-var argv = args(process.argv.slice(2));
-console.log(argv);
-console.log(argv[0])
+if (!fs.existsSync(componentPath)) {
+    fs.mkdirSync(componentPath);
 
-console.log(path.join(path.dirname(__filename), 'component'));
+    createComponentFile()
+    createStylesFile()
+    createIndexFile()
 
-// if (!fs.existsSync('component')) {
-//     fs.mkdirSync('component');
+    console.log('Pronto')
+} else {
+    console.log(chalk.red('Diretório já existe, remova o atual ou escolha outro nome.'));
+    // TODO: Perguntar se deseja remover o pacote
+}
 
-//     fs.writeFileSync(componentPath, componentContent, (err) => {
-//         if (err) throw err;
+function createComponentFile() {
+    const componentFile = `${componentName}.js`
+    const componentContent = 'component';
 
-//         console.log('Arquivo meucomponente.js criado com sucesso...');
-//     })
+    // fs.writeFileSync(path.join(componentPath, componentFile), componentContent, (err) => {
+    fs.writeFileSync('teste.js', 'teste', (err) => {
+        console.log(err);
+        if (err) throw err;
 
-//     fs.writeFileSync(indexPath, indexContent, (err) => {
-//         if (err) throw err;
+        console.log('Arquivo meucomponente.js criado com sucesso...');
+    })
+}
 
-//         console.log('Arquivo meuindex.js criado com sucesso...');
-//     })
+function createStylesFile() {
+    const stylesFile = 'styles.js'
+    const stylesContent = 'style';
 
-//     fs.writeFileSync(stylesPath, stylesContent, (err) => {
-//         if (err) throw err;
+    fs.writeFileSync(path.join(componentPath, stylesFile), stylesContent, (err) => {
+        if (err) throw err;
 
-//         console.log('Arquivo meustyle.js criado com sucesso...');
-//     })
+        console.log('Arquivo meustyle.js criado com sucesso...');
+    })
+}
 
-//     console.log('Pronto')
-// } else {
-//     console.log(chalk.red('Diretório já existe, remova o atual ou escolha outro nome.'));
-//     // TODO: Perguntar se deseja remover o pacote
-// }
+function createIndexFile() {
+    const indexFile = 'index.js'
+    const indexContent = 'index';
+
+    fs.writeFileSync(path.join(componentPath, indexFile), indexContent, (err) => {
+        if (err) throw err;
+
+        console.log('Arquivo meuindex.js criado com sucesso...');
+    })
+}
